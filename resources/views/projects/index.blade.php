@@ -23,17 +23,17 @@
     
         <tbody>
     
-            @foreach ($projects as $key=>$proj)
+            @foreach ($projects as $key=>$project)
 
             <tr>
-                <td>{{ $proj->id }}</td>
-                <td>{{ $proj->title }}</td>
-                {{-- <td>{{ $proj->description }}</td> --}}
-                <td><a href="{{ $proj->website_link }}" target="_blank">{{ $proj->website_link }}</a></td>
-                <td><a href="{{ $proj->source_code_link }}" target="_blank">{{ $proj->source_code_link }}</a></td>
-                <td>{{ $proj->proj_category }}</td>
-                <td>{{ $proj->client }}</td>
-                {{-- <td>{{ $proj->client_category }}</td> --}}
+                <td>{{ $project->id }}</td>
+                <td><a href="{{ route('projects.show', $project) }}">{{ $project->title }}</a></td>
+                {{-- <td>{{ $project->description }}</td> --}}
+                <td><a href="{{ $project->website_link }}" target="_blank">{{ $project->website_link }}</a></td>
+                <td><a href="{{ $project->source_code_link }}" target="_blank">{{ $project->source_code_link }}</a></td>
+                <td>{{ $project->proj_category }}</td>
+                <td>{{ $project->client }}</td>
+                {{-- <td>{{ $project->client_category }}</td> --}}
             </tr>
                 
             @endforeach
