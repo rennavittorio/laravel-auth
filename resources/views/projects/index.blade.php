@@ -3,9 +3,14 @@
 
 <div class="container">
 
-    <h1 class="py-5">
-        //my-proj-portfolio
-    </h1>
+    <div class="title-wrapper py-5">
+        <h1 class="mb-3">
+            //my-proj-portfolio
+        </h1>
+        <a href="#" class="w-auto btn btn-primary">
+            + add new project
+        </a>
+    </div>
     
     <table class="table">
         <thead>
@@ -17,6 +22,7 @@
                 <th scope="col">source</th>
                 <th scope="col">proj-cat</th>
                 <th scope="col">client</th>
+                <th scope="col">actions</th>
                 {{-- <th scope="col">client-cat</th> --}}
             </tr>
         </thead>
@@ -34,6 +40,12 @@
                 <td>{{ $project->proj_category }}</td>
                 <td>{{ $project->client }}</td>
                 {{-- <td>{{ $project->client_category }}</td> --}}
+                <td>
+                    <div class="btn-wrapper d-flex gap-3">
+                        <a href="#" class="btn btn-sm btn-warning"><></a>
+                        <a href="#" class="btn btn-sm btn-danger">x</a>
+                    </div>
+                </td>
             </tr>
                 
             @endforeach
