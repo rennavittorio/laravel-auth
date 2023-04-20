@@ -15,6 +15,9 @@
           <label for="title" class="form-label">title</label>
           <input type="text" class="form-control" id="title" name="title" value="{{ old('title') ?? "" }}">
         </div>
+        @error('title')
+            <div class="text-danger">{{ $message }}</div>
+        @enderror
 
         <div class="col-6">
             <label for="proj_category" class="form-label">proj_category</label>
@@ -34,19 +37,33 @@
             <label for="description" class="form-label">description</label>
             <textarea class="form-control" id="description" name="description" value="">{{ old('description') ?? "" }}</textarea>
         </div>
+        @error('description')
+            <div class="text-danger">{{ $message }}</div>
+        @enderror
+
         <div class="col-md-6">
             <label for="website_link" class="form-label">website_link</label>
             <input type="text" class="form-control" id="website_link" name="website_link" value="{{ old('website_link') ?? "" }}">
         </div>
+        @error('website_link')
+            <div class="text-danger">{{ $message }}</div>
+        @enderror
+
         <div class="col-md-6">
             <label for="source_code_link" class="form-label">source_code_link</label>
             <input type="text" class="form-control" id="source_code_link" name="source_code_link" value="{{ old('source_code_link') ?? "" }}">
         </div>
+        @error('source_code_link')
+            <div class="text-danger">{{ $message }}</div>
+        @enderror
 
         <div class="col-md-6">
             <label for="client" class="form-label">client</label>
             <input type="text" class="form-control" id="client" name="client" value="{{ old('client') ?? "" }}">
         </div>
+        @error('client')
+            <div class="text-danger">{{ $message }}</div>
+        @enderror
 
         <div class="col-6">
             <label for="client_category" class="form-label">client_category</label>
