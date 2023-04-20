@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateProjectRequest extends FormRequest
 {
@@ -24,7 +25,25 @@ class UpdateProjectRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            // 'title' => 'required|string|max:150|min:1',
+            'description' => 'required|string|max:3000|min:10',
+            'website_link' => 'nullable|string|url',
+            'source_code_link' => 'nullable|string|url',
+            'proj_category' => [
+                'required',
+                'max:100',
+                Rule::in([
+                    'frontend', 'backend', 'fullstack'
+                ])
+            ],
+            'client' => 'required|string|max:100|min:2',
+            'client_category' => [
+                'required',
+                'max:100',
+                Rule::in([
+                    'food-and-beverage', 'fashion', 'tech'
+                ])
+            ]
         ];
     }
 }

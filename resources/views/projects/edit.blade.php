@@ -23,7 +23,7 @@
             <label for="proj_category" class="form-label">proj_category</label>
             <select class="form-select @error('proj_category') is-invalid @enderror" 
             aria-label="Default select example" id="proj_category" name="proj_category" value="">
-                <option selected>Open this select menu</option>
+                <option>Open this select menu</option>
                 @foreach($project_categories as $key=>$cat)
                     <option @selected(old('proj_category') == $key) value="{{ $key }}"> {{ $cat }} </option>
                 @endforeach
@@ -69,7 +69,7 @@
             <label for="client_category" class="form-label">client_category</label>
             <select class="form-select @error('client_category') is-invalid @enderror" 
             aria-label="Default select example" id="client_category" name="client_category" value="">
-                <option selected>Open this select menu</option>
+                <option>Open this select menu</option>
                 @foreach($client_categories as $key=>$cat)
                     <option @selected(old('client_category') == $key) value="{{ $key }}"> {{ $cat }} </option>
                 @endforeach

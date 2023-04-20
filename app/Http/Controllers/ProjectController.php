@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 
 class ProjectController extends Controller
@@ -54,27 +53,8 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        $data = $request->validate([
-            'title' => 'required|string|max:150|min:1',
-            'description' => 'required|string|max:3000|min:10',
-            'website_link' => 'nullable|string|url|max:255',
-            'source_code_link' => 'nullable|string|url|max:255',
-            'proj_category' => [
-                'required',
-                'max:100',
-                Rule::in([
-                    'frontend', 'backend', 'fullstack'
-                ])
-            ],
-            'client' => 'required|string|max:100|min:2',
-            'client_category' => [
-                'required',
-                'max:100',
-                Rule::in([
-                    'food-and-beverage', 'fashion', 'tech'
-                ])
-            ]
-        ]);
+
+        $data = $request->validated(); //richiama la form request validation
 
         $new_proj = new Project();
         $new_proj->fill($data);
@@ -129,27 +109,7 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        $data = $request->validate([
-            // 'title' => 'required|string|max:150|min:1',
-            'description' => 'required|string|max:3000|min:10',
-            'website_link' => 'nullable|string|url',
-            'source_code_link' => 'nullable|string|url',
-            'proj_category' => [
-                'required',
-                'max:100',
-                Rule::in([
-                    'frontend', 'backend', 'fullstack'
-                ])
-            ],
-            'client' => 'required|string|max:100|min:2',
-            'client_category' => [
-                'required',
-                'max:100',
-                Rule::in([
-                    'food-and-beverage', 'fashion', 'tech'
-                ])
-            ]
-        ]);
+        $data = $request->validated();
 
         $project->update($data);
 
