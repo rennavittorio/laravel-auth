@@ -7,7 +7,7 @@
         <h1 class="mb-3">
             //my-proj-portfolio
         </h1>
-        <a href="#" class="w-auto btn btn-primary">
+        <a href="{{ route('projects.create') }}" class="w-auto btn btn-primary">
             + add new project
         </a>
     </div>

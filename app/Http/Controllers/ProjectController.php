@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
@@ -28,7 +30,20 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('projects.create');
+
+        $project_categories = [
+            'frontend' => 'frontend',
+            'backend' => 'backend',
+            'fullstack' => 'fullstack',
+        ];
+
+        $client_categories = [
+            'food-and-beverage' => 'food and beverage',
+            'fashion' => 'fashion',
+            'tech' => 'tech',
+        ];
+
+        return view('projects.create', compact('project_categories', 'client_categories'));
     }
 
     /**
@@ -39,7 +54,35 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        //
+        $data = $request->validate([
+            'title' => 'required|string|max:150|min:1',
+            'description' => 'required|string|max:3000|min:10',
+            'website_link' => 'nullable|string|url',
+            'source_code_link' => 'nullable|string|url',
+            'proj_category' => [
+                'required',
+                'max:100',
+                Rule::in([
+                    'frontend', 'backend', 'fullstack'
+                ])
+            ],
+            'client' => 'required|string|max:100|min:2',
+            'client_category' => [
+                'required',
+                'max:100',
+                Rule::in([
+                    'food-and-beverage', 'fashion', 'tech'
+                ])
+            ]
+        ]);
+
+        $new_proj = new Project();
+        $new_proj->fill($data);
+        $new_proj->slug = Str::of($data['title'])->slug();
+
+        $new_proj->save();
+
+        return to_route('projects.show', $new_proj->slug);
     }
 
     /**
