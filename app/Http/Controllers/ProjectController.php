@@ -57,8 +57,8 @@ class ProjectController extends Controller
         $data = $request->validate([
             'title' => 'required|string|max:150|min:1',
             'description' => 'required|string|max:3000|min:10',
-            'website_link' => 'nullable|string|url',
-            'source_code_link' => 'nullable|string|url',
+            'website_link' => 'nullable|string|url|max:255',
+            'source_code_link' => 'nullable|string|url|max:255',
             'proj_category' => [
                 'required',
                 'max:100',
@@ -156,6 +156,11 @@ class ProjectController extends Controller
         return to_route('projects.show', $project->slug);
     }
 
+    public function delete(Project $project)
+    {
+        return view('projects.delete', compact('project'));
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -164,6 +169,8 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        $project->delete();
+
+        return to_route('projects.index');
     }
 }

@@ -35,4 +35,8 @@ Route::middleware('auth')->group(function () {
     ]);
 });
 
+Route::get('/projects/{project}/delete', [ProjectController::class, 'delete'])->middleware(['auth'])->name('projects.delete');
+
+
+
 require __DIR__ . '/auth.php';

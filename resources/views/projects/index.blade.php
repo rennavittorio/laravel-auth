@@ -43,7 +43,7 @@
                 <td>
                     <div class="actions-wrapper d-flex gap-3">
                         <a href="{{ route('projects.edit', $project->slug) }}" class="btn btn-sm btn-warning"><></a>
-                        <a href="#" class="btn btn-sm btn-danger">x</a>
+                        <a href="{{ route('projects.delete', $project->id) }}" class="btn btn-sm btn-danger">x</a>
                     </div>
                 </td>
             </tr>
