@@ -19,7 +19,7 @@
                 <span class="card-subtitle me-3 text-body-secondary">Client: {{ $project['client'] }}</span>
                 <span class="card-subtitle text-body-secondary">Client Category: {{ $project['client_category'] }}</span>
             </div>
-            <a href="{{ route('projects.index') }}" class="btn btn-primary">Back to project list</a>
+            <a href="{{ route('projects.index') }}" class="btn btn-warning">Back to project list</a>
         </div>
     </div>
 

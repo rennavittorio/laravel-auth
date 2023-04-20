@@ -41,8 +41,8 @@
                 <td>{{ $project->client }}</td>
                 {{-- <td>{{ $project->client_category }}</td> --}}
                 <td>
-                    <div class="btn-wrapper d-flex gap-3">
-                        <a href="#" class="btn btn-sm btn-warning"><></a>
+                    <div class="actions-wrapper d-flex gap-3">
+                        <a href="{{ route('projects.edit', $project->slug) }}" class="btn btn-sm btn-warning"><></a>
                         <a href="#" class="btn btn-sm btn-danger">x</a>
                     </div>
                 </td>
