@@ -7,6 +7,13 @@
         <h1 class="mb-3">
             //my-proj-portfolio
         </h1>
+
+        @if(request()->session()->exists('message'))
+            <div class="text-danger py-3">
+                {{ request()->session()->pull('message') }}
+            </div>
+        @endif
+
         @if (request('trashed')) 
         {{-- le request('key') permette di recuperare la richiesta corrente della pagina --}}
         {{-- usiamo poi l'if per scomporre la navbar a seconda della pagina richiamata --}}

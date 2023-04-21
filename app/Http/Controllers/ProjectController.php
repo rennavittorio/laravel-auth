@@ -126,11 +126,14 @@ class ProjectController extends Controller
         return to_route('projects.show', $project->slug);
     }
 
-    public function restore(Project $project)
+
+    public function restore(Project $project, Request $request)
     {
 
         if ($project->trashed()) { //controllo che sia stato effettivamente cancellato
             $project->restore(); //metodo restore per eliminate il delete_at
+
+            $request->session()->flash('message', 'il post: ' . $project->title . ' è stato ripristinato');
         }
 
         return back(); //riporta alla pagina precedente, rispetto alla chiamata
