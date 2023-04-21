@@ -22,6 +22,7 @@
                 <th scope="col">source</th>
                 <th scope="col">proj-cat</th>
                 <th scope="col">client</th>
+                <th scope="col">created</th>
                 <th scope="col">deleted</th>
                 <th scope="col">actions</th>
                 {{-- <th scope="col">client-cat</th> --}}
@@ -40,7 +41,9 @@
                 <td><a href="{{ $project->source_code_link }}" target="_blank">{{ $project->source_code_link }}</a></td>
                 <td>{{ $project->proj_category }}</td>
                 <td>{{ $project->client }}</td>
-                <td>{{ $project->deleted_at }}</td>
+                <td>{{ $project->created_at->format('Y-m-d') }}</td>
+                <td>{{ $project->trashed() ? $project->deleted_at->format('Y-m-d') : '' }}</td>
+                {{-- senza ternario sul delete_at, i proj non cancellati sono null, e rimanda errore --}}
                 {{-- <td>{{ $project->client_category }}</td> --}}
                 <td>
                     <div class="actions-wrapper d-flex gap-3">
