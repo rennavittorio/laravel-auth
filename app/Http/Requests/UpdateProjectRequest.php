@@ -25,7 +25,13 @@ class UpdateProjectRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'title' => 'required|string|max:150|min:1',
+            'title' => [
+                'required',
+                'string',
+                'max:150',
+                'min:1',
+                Rule::unique('title', 'project')->ignore($this->project) //vedi docs
+            ],
             'description' => 'required|string|max:3000|min:10',
             'website_link' => 'nullable|string|url',
             'source_code_link' => 'nullable|string|url',
