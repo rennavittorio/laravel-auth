@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use Illuminate\Http\Request; //serve per aggiungere la request all'index, per ricevere paramas
 use Illuminate\Support\Str;
 
 class ProjectController extends Controller
@@ -14,12 +15,21 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
 
-        $projects = Project::withTrashed()->get();
+        $trashed = $request->input('trashed'); //->input('nome') permette di recuperare un singolo params
 
-        return view('projects.index', compact('projects'));
+        if ($trashed) {
+            $projects = Project::onlyTrashed()->get(); //per recupera solo i trashed
+        } else {
+            $projects = Project::all();
+        }
+
+        //$num_trashed = Project::onlyTrashed()->get()->count(); //cosi ci ritorna una collection, e poi calcola il num
+        $num_trashed = Project::onlyTrashed()->count(); //cosi ci ritorna un record con già il valore
+
+        return view('projects.index', compact('projects', 'num_trashed'));
     }
 
     /**
@@ -148,5 +158,7 @@ class ProjectController extends Controller
         $project->delete(); //capire il delete permanently
 
         return to_route('projects.index');
+
+        //return back(); //meglio, perché abbiamo aggiunto doppia-view proj active vs trashed
     }
 }

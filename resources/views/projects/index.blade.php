@@ -7,9 +7,24 @@
         <h1 class="mb-3">
             //my-proj-portfolio
         </h1>
+        @if (request('trashed')) 
+        {{-- le request('key') permette di recuperare la richiesta corrente della pagina --}}
+        {{-- usiamo poi l'if per scomporre la navbar a seconda della pagina richiamata --}}
+        <span>
+            Number of trashed el: {{ $num_trashed }}
+        </span>
+        <a href="{{ route('projects.index') }}" class="btn btn-warning">
+            Go back to list
+        </a>
+        @else
         <a href="{{ route('projects.create') }}" class="w-auto btn btn-primary">
             + add new project
         </a>
+        <a href="{{ route('projects.index', ['trashed' => true]) }}" class="w-auto btn btn-secondary">
+            {{-- [ dentro le quadre passiamo il params, fatto da key => value ] --}}
+            open bin
+        </a>
+        @endif
     </div>
     
     <table class="table">
