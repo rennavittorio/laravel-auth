@@ -20,15 +20,14 @@
         <div class="col-auto">
             <input type="submit" value="Delete" class="btn btn-danger"> 
         </div>
-    
-        <div class="col-auto">
-            <a href="{{ route('projects.index') }}" class="btn btn-warning">
-                Go back to list
-            </a>
-        </div>
-    
-        
+
     </form>
+    
+    <div class="col-auto">
+        <a href="{{ route('projects.index') }}" class="btn btn-warning">
+            Go back to list
+        </a>
+    </div>
 
 </div>
 

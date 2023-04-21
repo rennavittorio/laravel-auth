@@ -22,6 +22,7 @@
                 <th scope="col">source</th>
                 <th scope="col">proj-cat</th>
                 <th scope="col">client</th>
+                <th scope="col">deleted</th>
                 <th scope="col">actions</th>
                 {{-- <th scope="col">client-cat</th> --}}
             </tr>
@@ -39,11 +40,20 @@
                 <td><a href="{{ $project->source_code_link }}" target="_blank">{{ $project->source_code_link }}</a></td>
                 <td>{{ $project->proj_category }}</td>
                 <td>{{ $project->client }}</td>
+                <td>{{ $project->deleted_at }}</td>
                 {{-- <td>{{ $project->client_category }}</td> --}}
                 <td>
                     <div class="actions-wrapper d-flex gap-3">
                         <a href="{{ route('projects.edit', $project->slug) }}" class="btn btn-sm btn-warning"><></a>
                         <a href="{{ route('projects.delete', $project->id) }}" class="btn btn-sm btn-danger">x</a>
+                        @if($project->trashed())
+                        <form 
+                            action="{{ route('projects.restore', $project) }}" method="POST"
+                            class="row g-3">
+                                @csrf                            
+                                <input type="submit" value="r" class="btn btn-secondary">
+                            </form>
+                        @endif
                     </div>
                 </td>
             </tr>

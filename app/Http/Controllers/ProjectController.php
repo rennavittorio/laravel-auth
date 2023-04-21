@@ -17,7 +17,7 @@ class ProjectController extends Controller
     public function index()
     {
 
-        $projects = Project::all();
+        $projects = Project::withTrashed()->get();
 
         return view('projects.index', compact('projects'));
     }
@@ -116,6 +116,17 @@ class ProjectController extends Controller
         return to_route('projects.show', $project->slug);
     }
 
+    public function restore(Project $project)
+    {
+
+        if ($project->trashed()) { //controllo che sia stato effettivamente cancellato
+            $project->restore(); //metodo restore per eliminate il delete_at
+        }
+
+        return back(); //riporta alla pagina precedente, rispetto alla chiamata
+
+    }
+
     public function delete(Project $project)
     {
         return view('projects.delete', compact('project'));
@@ -129,7 +140,12 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        $project->delete();
+
+        if ($project->trashed()) {
+            $project->forceDelete(); //eliminazione permanente
+        }
+
+        $project->delete(); //capire il delete permanently
 
         return to_route('projects.index');
     }

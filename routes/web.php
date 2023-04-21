@@ -30,13 +30,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 
+    Route::get('/projects/{project}/delete', [ProjectController::class, 'delete'])->name('projects.delete')->withTrashed();
+
+    Route::post('/projects/{project:slug}/restore', [ProjectController::class, 'restore'])->name('projects.restore')->withTrashed();
+
     Route::resource('projects', ProjectController::class)->parameters([
         'projects' => 'project:slug'
-    ]);
+    ])->withTrashed(['show', 'destroy']); //bisogna specificare le rotte per cui fare withTrashed
 });
-
-Route::get('/projects/{project}/delete', [ProjectController::class, 'delete'])->middleware(['auth'])->name('projects.delete');
-
 
 
 require __DIR__ . '/auth.php';
